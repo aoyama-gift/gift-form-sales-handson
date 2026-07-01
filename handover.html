@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>GIFT 試運転 引き継ぎパッケージ</title>
+<style>
+  :root{
+    --bg-1:#0A0E2B;
+    --bg-2:#141834;
+    --bg-3:#1A3FBF;
+    --blue:#2E5BFF;
+    --sky:#65B9DD;
+    --gold:#D4AF37;
+    --gold-2:#E7C873;
+    --text:#eaf3ff;
+    --text-mute:#a9b8d6;
+    --card-bg:rgba(255,255,255,0.06);
+    --card-bd:rgba(255,255,255,0.14);
+    --card-bg-strong:rgba(255,255,255,0.09);
+    --warn-bg:rgba(212,175,55,0.14);
+    --warn-bd:rgba(212,175,55,0.55);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 130%);
+    background-attachment:fixed;
+    color:var(--text);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",system-ui,-apple-system,sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:56px 26px 96px}
+
+  header{
+    border-bottom:1px solid rgba(255,255,255,0.14);
+    padding-bottom:26px;margin-bottom:36px;
+  }
+  .brand{
+    font-size:12px;letter-spacing:.32em;color:var(--gold);
+    font-weight:800;text-transform:uppercase;margin-bottom:10px;
+  }
+  h1{
+    font-size:32px;line-height:1.35;margin:0 0 10px;font-weight:800;letter-spacing:.02em;
+    background:linear-gradient(90deg,#fff 0%,var(--sky) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{color:var(--text-mute);font-size:15px;margin:0;max-width:72ch}
+
+  .warn{
+    margin:24px 0 32px;
+    background:var(--warn-bg);
+    border:1px solid var(--warn-bd);
+    border-left:5px solid var(--gold);
+    border-radius:10px;
+    padding:16px 22px;
+  }
+  .warn .ttl{font-weight:800;color:var(--gold-2);margin-bottom:6px;letter-spacing:.02em}
+  .warn p{margin:0;font-size:14.5px}
+
+  h2{
+    display:flex;align-items:center;gap:14px;
+    font-size:22px;margin:52px 0 18px;font-weight:800;letter-spacing:.02em;
+  }
+  .chip{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--sky));
+    color:#fff;font-weight:800;font-size:15px;
+    box-shadow:0 4px 14px rgba(46,91,255,0.45);
+    flex-shrink:0;
+  }
+
+  /* ── ハイライトカード（川瀬さん用ハンズオン） ── */
+  .hero{
+    display:block;
+    background:linear-gradient(135deg, rgba(46,91,255,0.28), rgba(212,175,55,0.14));
+    border:1px solid rgba(212,175,55,0.45);
+    border-radius:16px;padding:28px 30px;
+    text-decoration:none;color:inherit;
+    backdrop-filter:blur(14px);
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    position:relative;margin:14px 0 22px;
+  }
+  .hero:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(46,91,255,0.35);
+    border-color:var(--gold);
+  }
+  .hero .badge{
+    display:inline-block;
+    background:var(--gold);color:#0A0E2B;
+    font-size:11px;font-weight:800;letter-spacing:.2em;
+    padding:3px 10px;border-radius:999px;margin-bottom:12px;
+  }
+  .hero h3{
+    margin:0 0 8px;font-size:22px;font-weight:800;letter-spacing:.02em;
+    color:#fff;
+  }
+  .hero p{margin:0 0 14px;color:var(--text-mute);font-size:15px;line-height:1.7}
+  .hero .meta{
+    border-top:1px dashed rgba(255,255,255,0.14);
+    padding-top:12px;font-size:13px;color:var(--text-mute);
+    display:flex;flex-wrap:wrap;gap:16px;
+  }
+  .hero .meta b{color:#fff}
+
+  /* ── カード群 ─────────────────────────── */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  @media(max-width:720px){.cards{grid-template-columns:1fr}}
+  .card{
+    background:var(--card-bg);
+    border:1px solid var(--card-bd);
+    border-radius:14px;padding:22px 24px;
+    text-decoration:none;color:inherit;
+    display:block;
+    backdrop-filter:blur(14px);
+    transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    position:relative;
+  }
+  .card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 20px rgba(46,91,255,0.25);
+    border-color:var(--sky);
+  }
+  .card .order{
+    position:absolute;top:14px;right:16px;
+    background:linear-gradient(135deg,var(--blue),var(--sky));
+    color:#fff;font-size:11px;font-weight:800;letter-spacing:.1em;
+    padding:3px 10px;border-radius:999px;
+  }
+  .card .kind{
+    font-size:10.5px;color:var(--gold);font-weight:800;letter-spacing:.24em;margin-bottom:6px;
+  }
+  .card h3{
+    margin:0 0 8px;font-size:16px;font-weight:800;line-height:1.4;color:#fff;
+  }
+  .card .sum{font-size:14px;color:var(--text-mute);margin:0 0 14px;line-height:1.65}
+  .card .meta{
+    border-top:1px dashed rgba(255,255,255,0.10);
+    padding-top:10px;
+    font-size:12.5px;color:var(--text-mute);
+    display:flex;flex-direction:column;gap:3px;
+  }
+  .card .meta b{color:#fff;font-weight:700}
+
+  /* ── チェックリスト ─────────────────────── */
+  .checklist{
+    background:var(--card-bg-strong);
+    border:1px solid var(--card-bd);
+    border-radius:14px;
+    padding:22px 28px;
+    backdrop-filter:blur(14px);
+  }
+  .checklist ol{margin:0;padding-left:24px}
+  .checklist li{margin:10px 0;font-size:15px;line-height:1.7}
+  .checklist li b{color:var(--gold-2)}
+
+  .contact{
+    display:inline-block;background:var(--blue);color:#fff;
+    padding:3px 12px;border-radius:999px;font-weight:700;letter-spacing:.04em;
+    font-size:12.5px;
+  }
+
+  .foot{
+    margin-top:60px;padding-top:22px;
+    border-top:1px solid rgba(255,255,255,0.10);
+    font-size:12.5px;color:var(--text-mute);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  }
+  a{color:var(--sky)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">GIFT / Handover</div>
+    <h1>GIFT 試運転 引き継ぎパッケージ</h1>
+    <p class="lede">
+      並行試運転（青山さん Mac ＋ 川瀬さん Mac）を「AI アシスタント主軸」で始めるための入口。
+      上から順に読めば準備が整います。
+    </p>
+  </header>
+
+  <div class="warn">
+    <div class="ttl">送信前の注意</div>
+    <p>実在先送信は「全件 人手キュー経由」＋「日次 10 件・09:00-18:00・間隔 30-90 秒」で運用します。誤送信の疑いを感じたら管理画面右上の <b>赤い「全停止」ボタン</b> を押してください。</p>
+  </div>
+
+  <!-- ── 川瀬さん用ハンズオン（最優先） ── -->
+  <h2><span class="chip">A</span>川瀬さんへ渡す</h2>
+  <a class="hero" href="../../docs/kawase-handson.html">
+    <span class="badge">最初にこれ</span>
+    <h3>川瀬さん用 ハンズオン ― AI に頼むだけで試運転が動く</h3>
+    <p>Mac に AI アシスタントを入れて、日本語で頼むだけでセットアップ・試送・成績確認・緊急停止まで進められる 1 ページ。「決まり文句集」と「バグを見つけたら」まで含む。</p>
+    <div class="meta">
+      <span>読み手: <b>川瀬さん（現場運用）</b></span>
+      <span>使う場面: <b>初回セットアップ 〜 毎日の運用</b></span>
+      <span>所要: <b>30 分（初回のみ）</b></span>
+    </div>
+  </a>
+
+  <!-- ── 青山さんの補助資料 ── -->
+  <h2><span class="chip">B</span>青山さんが押さえる資料</h2>
+  <div class="cards">
+
+    <a class="card" href="./operator-manual.html">
+      <span class="order">READ 1</span>
+      <div class="kind">HTML</div>
+      <h3>操作マニュアル</h3>
+      <p class="sum">運用コンソールの画面ごとの操作、確認待ちの判断、文面の差し替え、全停止までを画面の言葉でまとめた 1 冊。</p>
+      <div class="meta">
+        <span>読み手: <b>川瀬さん（現場運用）</b></span>
+        <span>使う場面: <b>毎日の運用</b></span>
+      </div>
+    </a>
+
+    <a class="card" href="./trial-runbook.html">
+      <span class="order">READ 2</span>
+      <div class="kind">HTML</div>
+      <h3>試運転 ランブック</h3>
+      <p class="sum">試運転の段取り。朝・昼・夕の流れ、Go / Pivot / Kill の判定ライン、緊急時の動き、tracking の使い方まで。</p>
+      <div class="meta">
+        <span>読み手: <b>川瀬さん・青山さん</b></span>
+        <span>使う場面: <b>試運転の期間中</b></span>
+      </div>
+    </a>
+
+    <a class="card" href="../../docs/trial-mac.md">
+      <span class="order">READ 3</span>
+      <div class="kind">Markdown</div>
+      <h3>Mac 試運転 手順（詳細）</h3>
+      <p class="sum">Mac 1 台での 1 コマンド起動、送信元 .env の埋め方、実在先 CSV の投入、プリフライト、10.2 試送ゲートまでの詳細フロー。</p>
+      <div class="meta">
+        <span>読み手: <b>青山さん（管理者）</b></span>
+        <span>使う場面: <b>並行試運転のセットアップ</b></span>
+      </div>
+    </a>
+
+    <a class="card" href="../../docs/trial-territory-split.md">
+      <span class="order">READ 4</span>
+      <div class="kind">Markdown</div>
+      <h3>担当分けメモ（青山さん・川瀬さん）</h3>
+      <p class="sum">実在先リストの担当分け・「同じ会社に 2 人から送らない」ルール・週次チェックの回し方。並行試運転の必読。</p>
+      <div class="meta">
+        <span>読み手: <b>青山さん・川瀬さん</b></span>
+        <span>使う場面: <b>並行試運転の期間中</b></span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── 川瀬さんに渡す前チェックリスト ── -->
+  <h2><span class="chip">C</span>川瀬さんに渡す前チェックリスト（青山さん）</h2>
+  <div class="checklist">
+    <ol>
+      <li><b>.env のテンプレを別チャネルで共有</b> ― メール本文に秘密を書かない（Chatwork DM か 1Password / パスワード付き zip 等）</li>
+      <li><b>GitHub アクセス権を発行</b> ― gift-org/form-sales に Collaborator 招待。招待ができない場合は「fork ベースの PR で送ってもらう or Issue のみ運用」を口頭説明</li>
+      <li><b>実在先リストの分担を口頭合意</b> ― 「担当分けメモ」の割当比率・受け渡しタイミングをその場で決める（1：1 でスタート推奨）</li>
+      <li><b>全停止ボタンの説明を口頭で 1 回</b> ― 「変だと思ったら押して OK。復旧は AI に頼めば戻せる」</li>
+      <li><b>撤退ライン（Go / Pivot / Kill）を口頭で 1 回</b> ― docs/12-pre-poc.md の 3 判定を要点だけ</li>
+      <li><b>初回だけ 15〜30 分横で見る</b> ― セットアップ〜1 件目の確認待ち承認まで、隣で見守る</li>
+    </ol>
+  </div>
+
+  <!-- ── 試運転前提 ── -->
+  <h2><span class="chip">D</span>試運転を始められる前提</h2>
+  <div class="checklist">
+    <ol>
+      <li><b>法務 OK</b> ― プライバシーポリシーの弁護士チェック済（2026-06-30 取得）</li>
+      <li><b>青山さん Mac が起動</b> ― 送信元 .env が埋まっている</li>
+      <li><b>川瀬さん Mac にセットアップ完了</b> ― AI アシスタント初期化と gh 認証まで終わっている</li>
+      <li><b>実在先リストの担当分けが済んでいる</b> ― 「担当分けメモ」に沿ってスプレッドシート更新済み</li>
+    </ol>
+  </div>
+
+  <h2><span class="chip">E</span>困ったとき</h2>
+  <div class="checklist">
+    <p style="margin:0">連絡先: <span class="contact">青山さん</span> ／ 誤送信・止まらない疑いは並行して電話。</p>
+  </div>
+
+  <div class="foot">
+    <span>GIFT 試運転 引き継ぎパッケージ</span>
+    <span>2026-07</span>
+  </div>
+
+</div>
+</body>
+</html>

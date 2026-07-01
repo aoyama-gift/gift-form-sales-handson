@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>GIFT フォーム営業 ハンズオン（川瀬さん用）</title>
+<style>
+  :root{
+    --bg-1:#0A0E2B;
+    --bg-2:#141834;
+    --bg-3:#1A3FBF;
+    --blue:#2E5BFF;
+    --sky:#65B9DD;
+    --gold:#D4AF37;
+    --gold-2:#E7C873;
+    --text:#eaf3ff;
+    --text-mute:#a9b8d6;
+    --card-bg:rgba(255,255,255,0.06);
+    --card-bd:rgba(255,255,255,0.14);
+    --card-bg-strong:rgba(255,255,255,0.09);
+    --warn-bg:rgba(212,175,55,0.14);
+    --warn-bd:rgba(212,175,55,0.55);
+    --ok-bg:rgba(101,185,221,0.12);
+    --ok-bd:rgba(101,185,221,0.45);
+    --danger-bg:rgba(255,120,120,0.12);
+    --danger-bd:rgba(255,120,120,0.45);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 130%);
+    background-attachment:fixed;
+    color:var(--text);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",system-ui,-apple-system,sans-serif;
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:56px 26px 96px}
+
+  /* ── ヘッダー ─────────────────────────────── */
+  header{
+    border-bottom:1px solid rgba(255,255,255,0.14);
+    padding-bottom:26px;margin-bottom:36px;
+  }
+  .brand{
+    font-size:12px;letter-spacing:.32em;color:var(--gold);
+    font-weight:800;text-transform:uppercase;margin-bottom:10px;
+  }
+  h1{
+    font-size:32px;line-height:1.35;margin:0 0 10px;font-weight:800;letter-spacing:.02em;
+    background:linear-gradient(90deg,#fff 0%,var(--sky) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{color:var(--text-mute);font-size:15px;margin:0;max-width:70ch}
+
+  /* ── 章見出し ─────────────────────────────── */
+  h2{
+    display:flex;align-items:center;gap:14px;
+    font-size:22px;margin:56px 0 18px;font-weight:800;letter-spacing:.02em;
+  }
+  .chip{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--sky));
+    color:#fff;font-weight:800;font-size:15px;
+    box-shadow:0 4px 14px rgba(46,91,255,0.45);
+    flex-shrink:0;
+  }
+  h3{
+    font-size:16px;margin:22px 0 8px;font-weight:700;color:var(--sky);letter-spacing:.02em;
+  }
+
+  /* ── カード ───────────────────────────────── */
+  .card{
+    background:var(--card-bg);
+    border:1px solid var(--card-bd);
+    border-radius:14px;
+    padding:22px 26px;
+    margin:14px 0;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .card.strong{background:var(--card-bg-strong)}
+  .card p:first-child{margin-top:0}
+  .card p:last-child{margin-bottom:0}
+  .card ul,.card ol{margin:8px 0}
+
+  /* ── 注意ボックス ────────────────────────── */
+  .warn{
+    background:var(--warn-bg);
+    border:1px solid var(--warn-bd);
+    border-left:5px solid var(--gold);
+    border-radius:10px;
+    padding:16px 20px;margin:14px 0;
+  }
+  .warn .ttl{font-weight:800;color:var(--gold-2);margin-bottom:6px;letter-spacing:.02em}
+
+  .ok{
+    background:var(--ok-bg);
+    border:1px solid var(--ok-bd);
+    border-left:5px solid var(--sky);
+    border-radius:10px;
+    padding:16px 20px;margin:14px 0;
+  }
+  .ok .ttl{font-weight:800;color:var(--sky);margin-bottom:6px}
+
+  .danger{
+    background:var(--danger-bg);
+    border:1px solid var(--danger-bd);
+    border-left:5px solid #ff8080;
+    border-radius:10px;
+    padding:16px 20px;margin:14px 0;
+  }
+  .danger .ttl{font-weight:800;color:#ffb0b0;margin-bottom:6px}
+
+  /* ── コマンド／コピー用ボックス ───────────── */
+  .cmd{
+    background:rgba(0,0,0,0.35);
+    border:1px solid rgba(101,185,221,0.28);
+    border-radius:8px;
+    padding:14px 16px;
+    font-family:"SF Mono","Menlo","Consolas","Courier New",monospace;
+    font-size:13.5px;color:#dfe9ff;
+    overflow-x:auto;white-space:pre;
+    margin:10px 0;
+    line-height:1.6;
+  }
+  .say{
+    background:linear-gradient(135deg, rgba(46,91,255,0.18), rgba(101,185,221,0.10));
+    border:1px solid rgba(101,185,221,0.35);
+    border-radius:10px;
+    padding:14px 18px;
+    margin:8px 0;
+    font-size:15.5px;
+    color:#f4f8ff;
+    line-height:1.7;
+    position:relative;
+  }
+  .say::before{
+    content:"AI に頼む言い方";
+    display:block;
+    font-size:11px;letter-spacing:.2em;color:var(--gold);font-weight:800;margin-bottom:6px;
+  }
+  .say b{color:var(--gold-2);font-weight:700}
+
+  /* ── 5画面テーブル ───────────────────────── */
+  table{
+    width:100%;border-collapse:collapse;
+    margin:14px 0;font-size:14.5px;
+  }
+  th,td{
+    padding:11px 12px;text-align:left;
+    border-bottom:1px solid rgba(255,255,255,0.10);
+    vertical-align:top;
+  }
+  th{
+    background:rgba(46,91,255,0.14);
+    font-weight:800;color:var(--sky);
+    letter-spacing:.02em;
+  }
+
+  /* ── バグ報告フロー ──────────────────────── */
+  .flow{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0;
+  }
+  @media(max-width:720px){.flow{grid-template-columns:1fr}}
+  .step{
+    background:var(--card-bg);
+    border:1px solid var(--card-bd);
+    border-radius:12px;padding:16px 18px;
+    position:relative;
+  }
+  .step .n{
+    position:absolute;top:-12px;left:16px;
+    width:26px;height:26px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--sky));
+    color:#fff;font-weight:800;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 3px 10px rgba(46,91,255,0.4);
+  }
+  .step h4{margin:6px 0 6px;font-size:15px;color:var(--gold-2)}
+  .step p{margin:0;font-size:14px;color:var(--text-mute);line-height:1.6}
+
+  /* ── 詰まり事典 ───────────────────────────── */
+  .trouble{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  }
+  @media(max-width:720px){.trouble{grid-template-columns:1fr}}
+  .trouble .t{
+    background:var(--card-bg);
+    border:1px solid var(--card-bd);
+    border-radius:10px;
+    padding:14px 16px;
+  }
+  .trouble .t b{color:var(--gold-2);display:block;margin-bottom:4px;font-size:14px}
+  .trouble .t p{margin:0;font-size:13.5px;color:var(--text-mute);line-height:1.6}
+
+  /* ── フッター ─────────────────────────────── */
+  .foot{
+    margin-top:60px;padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.10);
+    font-size:12.5px;color:var(--text-mute);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  }
+
+  /* ── 内リンク ────────────────────────────── */
+  a{color:var(--sky);text-decoration:none;border-bottom:1px dotted rgba(101,185,221,0.4)}
+  a:hover{color:var(--gold-2);border-bottom-color:var(--gold-2)}
+
+  strong,b{color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">GIFT / Hands-on</div>
+    <h1>川瀬さん用 ハンズオン<br/>― Mac で「AI に頼むだけ」で試運転を始める</h1>
+    <p class="lede">
+      川瀬さんの Mac に AI アシスタントを入れて、あとは日本語で頼むだけで
+      フォーム営業の試運転が動くようになります。所要 30 分。
+      困ったら青山さんに聞いてください。
+    </p>
+  </header>
+
+  <!-- ── 1. はじめに ─────────────────────────── -->
+  <h2><span class="chip">1</span>はじめに</h2>
+  <div class="card">
+    <p>この資料は、川瀬さんの Mac 1 台で GIFT フォーム営業を試運転するための手順です。</p>
+    <ul>
+      <li>入れるのは <b>AI アシスタント</b>（＝AI が Mac の中で作業してくれる相棒）</li>
+      <li>川瀬さんが自分でやるのは <b>ターミナルを開く</b>／<b>コピペして Enter</b>／<b>パスワード入力</b>／<b>ブラウザで承認ボタンを押す</b> の 4 つだけ</li>
+      <li>それ以外は AI アシスタントが全部やります。分からないコマンドは覚えなくて OK</li>
+      <li>詰まったら「これで詰まった」と AI に言ってください。読んで直してくれます</li>
+    </ul>
+  </div>
+
+  <!-- ── 2. AIアシスタントを入れる ──────────── -->
+  <h2><span class="chip">2</span>Mac に AI アシスタントを入れる（初回だけ 15 分）</h2>
+
+  <h3>2-1. ターミナルを開く</h3>
+  <div class="card">
+    <p>Mac の画面右上の <b>虫めがねアイコン（Spotlight）</b> を押して、<b>ターミナル</b> と打って Enter。<br/>
+    黒か白の四角い画面が出てくればそれです。以下のコマンドは、そこにコピペして Enter で実行します。</p>
+  </div>
+
+  <h3>2-2. Homebrew を入れる（Mac の道具箱）</h3>
+  <div class="card">
+    <p>下の 1 行をコピペして Enter。途中で Mac のログインパスワードを聞かれます（画面に文字は出ませんが打てています）。</p>
+    <div class="cmd">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</div>
+    <p style="margin-top:10px;color:var(--text-mute);font-size:13.5px">最後に「Next steps:」と出たら、その下に書いてある <code>eval "$(...)"</code> の行もそのままコピペして Enter してください（PATH を通す作業です）。</p>
+  </div>
+
+  <h3>2-3. Node と Git を入れる</h3>
+  <div class="card">
+    <div class="cmd">brew install node git</div>
+  </div>
+
+  <h3>2-4. AI アシスタントを入れる</h3>
+  <div class="card">
+    <div class="cmd">npm install -g @anthropic-ai/claude-code</div>
+    <p style="margin-top:10px">これで <b>claude</b> というコマンドが使えるようになります。</p>
+  </div>
+
+  <h3>2-5. 起動する</h3>
+  <div class="card">
+    <div class="cmd">claude</div>
+    <div class="warn" style="margin-top:12px">
+      <div class="ttl">初回だけ青山さんに手伝ってもらう</div>
+      <p style="margin:0">初回起動時にログインを聞かれます。<b>青山さんに電話</b>して、アカウント共有 or 一時トークンを発行してもらってください。ブラウザが自動で開きます。以降は聞かれません。</p>
+    </div>
+  </div>
+
+  <!-- ── 3. リポジトリを取り込む ──────────── -->
+  <h2><span class="chip">3</span>試運転するリポジトリ（プログラム一式）を取り込む</h2>
+  <div class="card">
+    <p>下を 1 行ずつコピペして実行してください。</p>
+    <div class="cmd">cd ~/Documents
+git clone https://github.com/gift-org/form-sales.git
+cd form-sales
+claude</div>
+    <p style="margin-top:12px">最後の <b>claude</b> でこのプロジェクトの中で AI アシスタントが立ち上がります。ここから先は日本語で頼むだけ。</p>
+    <div class="warn">
+      <div class="ttl">GitHub への認証が要ったら</div>
+      <p style="margin:0">「<b>認証してほしい</b>」と AI に言えば <code>gh auth login</code> を案内してくれます。川瀬さんは表示された URL をブラウザで開いて <b>Authorize</b> のボタンを押すだけ。</p>
+    </div>
+  </div>
+
+  <!-- ── 4. 決まり文句集 ────────────────────── -->
+  <h2><span class="chip">4</span>AI に頼めば全部進む ― 決まり文句集</h2>
+  <div class="card strong">
+    <p style="margin:0 0 8px">下の言い方をそのままコピペして AI に投げれば、あとは AI がやります。<br/>覚える必要はありません。ここを見ながら順に頼んでください。</p>
+  </div>
+
+  <h3>セットアップ（試運転を始められる状態にする）</h3>
+  <div class="say">試運転できるようにセットアップして</div>
+
+  <h3>自社情報を .env に書く（実送信の前に必須）</h3>
+  <div class="say">
+    私の会社情報を <b>.env</b> に書いてほしい。<br/>
+    会社名は <b>◯◯</b>、担当者名は <b>川瀬 ◯◯</b>、フリガナは <b>カワセ　◯◯</b>、<br/>
+    メールは <b>◯◯@◯◯.jp</b>、電話は <b>03-◯◯◯◯-◯◯◯◯</b>、URL は <b>https://◯◯</b>。
+  </div>
+  <div class="warn">
+    <div class="ttl">この情報が入っていないと本番送信は動きません</div>
+    <p style="margin:0">エンジンが起動時に止まる仕組みになっています（誤送信の予防）。DRY_RUN（練習モード）だけは、未入力でも動きます。</p>
+  </div>
+
+  <h3>管理画面を開く</h3>
+  <div class="say">管理画面をブラウザで開いて</div>
+
+  <h3>実在先を追加する</h3>
+  <div class="say">
+    これから <b>3 社の URL</b> を教えるので、試送リストに追加して。<br/>
+    ① https://◯◯ / ② https://◯◯ / ③ https://◯◯
+  </div>
+
+  <h3>リハーサル（本番の前に）</h3>
+  <div class="say">本番の前にリハーサルして</div>
+  <p style="color:var(--text-mute);font-size:13.5px;margin:4px 0 0">
+    ※ 内部で「差し込みミスがないか」を全項目チェックします。<br/>
+    ok と出たら次へ。ng が出たら AI が原因を教えてくれます。
+  </p>
+
+  <h3>確認待ちを見る（送信前の最終チェック）</h3>
+  <div class="say">確認待ちを見せて</div>
+  <p style="color:var(--text-mute);font-size:13.5px;margin:4px 0 0">
+    ※ 実在先は全件 <b>川瀬さんが目で見て承認</b> してから送られます。ブラウザに一覧が出るので、内容を見て「送信 / 補完して送信 / スキップ」のどれかを選んでください。
+  </p>
+
+  <h3>成績を見る</h3>
+  <div class="say">今日の成績を教えて</div>
+
+  <h3>全部止める（緊急停止）</h3>
+  <div class="say">全部止めて</div>
+  <div class="danger">
+    <div class="ttl">迷ったら止める</div>
+    <p style="margin:0">送信中に「あれ、変だ」と思ったら、まず止める。復旧は AI が案内します。<br/>
+    管理画面の右上にも <b>赤い「全停止」ボタン</b> があります。同じ効果です。</p>
+  </div>
+
+  <h3>エラーが出たとき</h3>
+  <div class="say">エラーが出た。読んで対処して</div>
+  <p style="color:var(--text-mute);font-size:13.5px;margin:4px 0 0">
+    ※ 画面に出たエラーの内容をそのままコピペして貼ると精度が上がります。
+  </p>
+
+  <h3>文面を編集したい</h3>
+  <div class="say">文面を編集したい</div>
+
+  <h3>除外先を追加したい</h3>
+  <div class="say">◯◯（会社名 or ドメイン）を除外先に追加して</div>
+
+  <!-- ── 5. バグや違和感 ────────────────────── -->
+  <h2><span class="chip">5</span>バグや違和感を見つけたら（重要）</h2>
+
+  <div class="card strong">
+    <p style="margin:0 0 8px"><b>「気になった」段階で言葉にして AI に頼んでください。</b><br/>
+    AI がその場で GitHub に <b>Issue</b>（＝報告カード）を切って、青山さんが見に行けるようにします。<br/>
+    修正案まで明確なら、AI がそのまま <b>修正提案（PR）</b> まで作ります。</p>
+  </div>
+
+  <h3>言い方の例（そのままコピペで OK）</h3>
+
+  <div class="say">
+    <b>◯◯の画面で△△が××になってる。</b>おかしい気がする。<br/>
+    バグかもしれないから、記録して欲しい。
+  </div>
+
+  <div class="say">
+    <b>◯◯したら△△のエラーが出た。</b><br/>
+    同じことが起きないように直してほしい。
+  </div>
+
+  <div class="say">
+    <b>◯◯の文言、川瀬的にはこう変えたほうが自然。</b><br/>
+    修正案として残して。
+  </div>
+
+  <h3>AI が自動でやること</h3>
+  <div class="flow">
+    <div class="step">
+      <div class="n">1</div>
+      <h4>現象を要約</h4>
+      <p>川瀬さんが話した内容を「何をしたら」「何が起きた」「期待していた挙動」に整理します。</p>
+    </div>
+    <div class="step">
+      <div class="n">2</div>
+      <h4>GitHub Issue を立てる</h4>
+      <p><code>gh issue create</code> で自動起票。ラベルは <b>trial-feedback</b>。青山さんが後で気付けます。</p>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <h4>影響が小さければ PR まで作る</h4>
+      <p>修正案が明確で 1〜2 ファイルの変更で済む場合、feature ブランチで PR を作ります。青山さんがマージ判断。</p>
+    </div>
+  </div>
+
+  <div class="warn">
+    <div class="ttl">権限が足りないとき</div>
+    <p style="margin:0">gift-org のメンバー招待がまだの場合、<b>Issue だけ</b> 立てて「青山さんへ引き継ぎ」と本文に書きます。青山さんが後で対応。<br/>
+    川瀬さんは何もしなくて OK。</p>
+  </div>
+
+  <div class="ok">
+    <div class="ttl">青山さんが承認する導線</div>
+    <p style="margin:0">
+      Issue → <a href="https://github.com/gift-org/form-sales/issues">github.com/gift-org/form-sales/issues</a><br/>
+      PR → <a href="https://github.com/gift-org/form-sales/pulls">github.com/gift-org/form-sales/pulls</a><br/>
+      青山さんは 1 日 1 回、上を軽くチェックして、対応方針を決める or マージします。
+    </p>
+  </div>
+
+  <!-- ── 6. 5 画面 ──────────────────────────── -->
+  <h2><span class="chip">6</span>画面の使い方（5 つ + 停止ボタン）</h2>
+
+  <div class="card">
+    <p>ブラウザで <a href="http://127.0.0.1:3000/">http://127.0.0.1:3000/</a> を開いて、上のメニューから移動します。<br/>
+    分からなくなったら AI に「<b>◯◯の画面を開いて</b>」と頼んで OK。</p>
+    <table>
+      <thead>
+        <tr>
+          <th>画面</th>
+          <th>何が見える／何をする</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>成績</b><br/>（ダッシュボード）</td>
+          <td>今日／今週の送信数・返信数・アポ数。まずここで全体を見る。</td>
+        </tr>
+        <tr>
+          <td><b>確認待ち</b><br/>（人間キュー）</td>
+          <td>実在先に送る前の最終チェック。<b>「送信 / 補完して送信 / スキップ」</b> の 3 択。迷ったらスキップ。</td>
+        </tr>
+        <tr>
+          <td><b>文面</b><br/>（テンプレ管理）</td>
+          <td>A/B/C/D の 4 種類。反応率が併記される。直したい文面を選んで書き換え。</td>
+        </tr>
+        <tr>
+          <td><b>除外先</b><br/>（サプレッション）</td>
+          <td>もう送らない会社・ドメインの一覧。「営業お断り」返信が来た会社はここに追加。</td>
+        </tr>
+        <tr>
+          <td><b>設定</b></td>
+          <td>1 日の送信上限、送信時間帯、送信間隔。試運転中は既定値のままで OK。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="danger">
+      <div class="ttl">画面右上の 赤い「全停止」ボタン</div>
+      <p style="margin:0">
+        押すと <b>送信が即座に止まります</b>（緊急停止）。<br/>
+        変だと思ったら押して大丈夫。復旧は AI に「送信を再開して」で戻せます。
+      </p>
+    </div>
+  </div>
+
+  <!-- ── 7. 詰まり事典 ─────────────────────── -->
+  <h2><span class="chip">7</span>困ったとき（詰まり事典）</h2>
+
+  <div class="card">
+    <p style="margin:0 0 10px">まず、下の言い方で AI に投げてください。8 割はこれで解決します。</p>
+    <div class="say">エラーが出た。読んで対処して</div>
+    <p style="margin-top:12px;color:var(--text-mute)">それでもダメなら青山さんに電話。</p>
+  </div>
+
+  <div class="trouble">
+    <div class="t">
+      <b>PostgreSQL に接続できません</b>
+      <p>AI に「Postgres を起動して」と頼めば <code>brew services start postgresql@16</code> を実行してくれます。</p>
+    </div>
+    <div class="t">
+      <b>画面が真っ白／管理画面が開かない</b>
+      <p>AI に「管理画面のログを見て原因を教えて」と頼む。多くはポート衝突か DB 未起動。</p>
+    </div>
+    <div class="t">
+      <b>「認証してください」と GitHub に言われる</b>
+      <p>AI に「gh auth login して」と頼む。ブラウザで開いた URL の Authorize を押すだけ。</p>
+    </div>
+    <div class="t">
+      <b>「.env の値が足りません」と止まる</b>
+      <p>AI に「.env の必須項目を教えて。埋め方も出して」で誘導してくれます。</p>
+    </div>
+    <div class="t">
+      <b>送信が止まらない気がする</b>
+      <p>まず管理画面右上の <b>赤い「全停止」ボタン</b> を押す。落ち着いてから AI に「状況を教えて」。</p>
+    </div>
+    <div class="t">
+      <b>何をしてよいか分からない</b>
+      <p>触らない。青山さんに電話。壊れないので大丈夫。</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>GIFT フォーム営業 / 川瀬さん用ハンズオン</span>
+    <span>2026-07</span>
+  </div>
+
+</div>
+</body>
+</html>
