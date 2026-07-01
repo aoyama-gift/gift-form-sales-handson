@@ -214,13 +214,17 @@
 <div class="wrap">
 
   <header>
-    <div class="brand">GIFT / Hands-on</div>
+    <div class="brand">GIFT / Handover</div>
     <h1>川瀬さん用 ハンズオン<br/>― Mac で「AI に頼むだけ」で試運転を始める</h1>
     <p class="lede">
-      川瀬さんの Mac に AI アシスタントを入れて、あとは日本語で頼むだけで
+      川瀬さんの Mac に GIFT の AI アシスタントを入れて、あとは日本語で頼むだけで
       フォーム営業の試運転が動くようになります。所要 30 分。
-      困ったら青山さんに聞いてください。
+      困ったら青山さんに聞いてください（連絡先は最終セクションに）。
     </p>
+    <div class="warn" style="margin-top:16px">
+      <div class="ttl">この資料の取り扱い</div>
+      <p style="margin:0">本資料は GIFT 社内向け・川瀬さん個人配布用です。<b>第三者への転送・SNS 公開はしないでください。</b>AI アシスタントの実体名（配布ツール名）は業務都合で伏せています。</p>
+    </div>
   </header>
 
   <!-- ── 1. はじめに ─────────────────────────── -->
@@ -228,11 +232,21 @@
   <div class="card">
     <p>この資料は、川瀬さんの Mac 1 台で GIFT フォーム営業を試運転するための手順です。</p>
     <ul>
-      <li>入れるのは <b>AI アシスタント</b>（＝AI が Mac の中で作業してくれる相棒）</li>
+      <li>入れるのは <b>GIFT の AI アシスタント</b>（＝AI が Mac の中で作業してくれる相棒）</li>
       <li>川瀬さんが自分でやるのは <b>ターミナルを開く</b>／<b>コピペして Enter</b>／<b>パスワード入力</b>／<b>ブラウザで承認ボタンを押す</b> の 4 つだけ</li>
       <li>それ以外は AI アシスタントが全部やります。分からないコマンドは覚えなくて OK</li>
       <li>詰まったら「これで詰まった」と AI に言ってください。読んで直してくれます</li>
     </ul>
+
+    <div class="warn" style="margin-top:14px">
+      <div class="ttl">始める前に青山さんから届いているか確認</div>
+      <ol style="margin:6px 0 0 0;padding-left:22px">
+        <li>Chatwork DM で <b>AI アシスタントのアカウント招待メール</b>（アカウント作成用リンク）が届いている</li>
+        <li>Chatwork DM で <b>GitHub の Collaborator 招待メール</b> が届いている（gift-org/form-sales）</li>
+        <li>Chatwork DM で <b>青山さんの緊急連絡先電話番号</b> を受け取っている</li>
+      </ol>
+      <p style="margin:8px 0 0">1 つでも届いていなければ、先に Chatwork で青山さんに連絡してください。届いてから始めれば詰まりません。</p>
+    </div>
   </div>
 
   <!-- ── 2. AIアシスタントを入れる ──────────── -->
@@ -251,38 +265,53 @@
     <p style="margin-top:10px;color:var(--text-mute);font-size:13.5px">最後に「Next steps:」と出たら、その下に書いてある <code>eval "$(...)"</code> の行もそのままコピペして Enter してください（PATH を通す作業です）。</p>
   </div>
 
-  <h3>2-3. Node と Git を入れる</h3>
+  <h3>2-3. 試運転するプログラム一式を取り込む（先に置く）</h3>
   <div class="card">
-    <div class="cmd">brew install node git</div>
+    <p>まず GIFT の道具（git など）を入れます。</p>
+    <div class="cmd">brew install git</div>
+    <p style="margin-top:10px">次に、フォーム営業の試運転プログラム一式を取り込みます。<br/>
+    <b>下の 2 行のうち 1 行目でエラー（Repository not found など）が出たら、青山さんに Chatwork で連絡してください</b>。gift-org の Collaborator 招待がまだ届いていない可能性があります。</p>
+    <div class="cmd">cd ~/Documents
+git clone https://github.com/gift-org/form-sales.git
+cd form-sales</div>
+    <p style="margin-top:10px;color:var(--text-mute);font-size:13.5px">※ 初回だけ GitHub のユーザー名とアクセストークンを聞かれることがあります。<b>詰まったら青山さんに Chatwork DM でその画面のスクリーンショットを送ってください。</b>次のセクションの AI アシスタントを入れてしまえば、以降は AI が代行します。</p>
   </div>
 
-  <h3>2-4. AI アシスタントを入れる</h3>
+  <h3>2-4. GIFT の AI アシスタントを入れる（1 コマンド）</h3>
   <div class="card">
-    <div class="cmd">npm install -g @anthropic-ai/claude-code</div>
-    <p style="margin-top:10px">これで <b>claude</b> というコマンドが使えるようになります。</p>
+    <p>先ほど取り込んだプログラム一式に、セットアップ用のスクリプトが入っています。<br/>下の 1 行をコピペして Enter。<b>裏で Node・GitHub CLI・PostgreSQL・AI アシスタント本体を全部入れます</b>。</p>
+    <div class="cmd">bash scripts/install-gift-assistant.sh</div>
+    <p style="margin-top:10px">最後に「PATH は通っています」or 「PATH に <code>$HOME/.local/bin</code> を通してください」と出ます。前者ならそのまま次へ。後者なら、表示されたとおり <code>~/.zshrc</code> に 1 行追記してターミナルを開き直してください（AI アシスタントに「PATH を通して」と頼めば代行してくれます）。</p>
+    <div class="warn" style="margin-top:12px">
+      <div class="ttl">AI アシスタントの正体は？</div>
+      <p style="margin:0">GIFT が業務用に配布している AI アシスタント（GIFT の内部規定でツール名は非公開）。他社に本資料や配布ツール名を口外しないでください。</p>
+    </div>
   </div>
 
   <h3>2-5. 起動する</h3>
   <div class="card">
-    <div class="cmd">claude</div>
+    <div class="cmd">gift</div>
     <div class="warn" style="margin-top:12px">
-      <div class="ttl">初回だけ青山さんに手伝ってもらう</div>
-      <p style="margin:0">初回起動時にログインを聞かれます。<b>青山さんに電話</b>して、アカウント共有 or 一時トークンを発行してもらってください。ブラウザが自動で開きます。以降は聞かれません。</p>
+      <div class="ttl">初回だけログインが要ります</div>
+      <p style="margin:0">初回起動時にログインを聞かれます。<b>青山さんから届いた「AI アシスタントのアカウント招待メール」</b>の中のリンクを開いて、川瀬さん名義でパスワード設定してからログインしてください。<br/>
+      招待メールが届いていない場合は、始める前に <b>Chatwork DM で青山さんに連絡</b> してください（電話番号も DM で共有されます）。以降のログインは聞かれません。</p>
+    </div>
+    <div class="ok" style="margin-top:12px">
+      <div class="ttl">アカウント共有はしません</div>
+      <p style="margin:0">川瀬さん名義の正規アカウントで使います。青山さんのアカウントの ID / パスワードは共有されません（利用規約の関係で共有 NG）。</p>
     </div>
   </div>
 
-  <!-- ── 3. リポジトリを取り込む ──────────── -->
-  <h2><span class="chip">3</span>試運転するリポジトリ（プログラム一式）を取り込む</h2>
+  <!-- ── 3. AI に GitHub 認証を頼む ──────────── -->
+  <h2><span class="chip">3</span>AI に GitHub 認証を頼む（初回だけ）</h2>
   <div class="card">
-    <p>下を 1 行ずつコピペして実行してください。</p>
-    <div class="cmd">cd ~/Documents
-git clone https://github.com/gift-org/form-sales.git
-cd form-sales
-claude</div>
-    <p style="margin-top:12px">最後の <b>claude</b> でこのプロジェクトの中で AI アシスタントが立ち上がります。ここから先は日本語で頼むだけ。</p>
-    <div class="warn">
-      <div class="ttl">GitHub への認証が要ったら</div>
-      <p style="margin:0">「<b>認証してほしい</b>」と AI に言えば <code>gh auth login</code> を案内してくれます。川瀬さんは表示された URL をブラウザで開いて <b>Authorize</b> のボタンを押すだけ。</p>
+    <p>AI アシスタントに、そのまま日本語で頼んでください。</p>
+    <div class="say">GitHub 認証してほしい（<code>gh auth login</code>）</div>
+    <p style="margin-top:10px">AI が案内を出します。ブラウザで表示された URL を開いて、<b>Authorize</b> ボタンを押すだけです。<br/>
+    以降、Issue 起票・PR 作成は AI が全部代行できるようになります。</p>
+    <div class="warn" style="margin-top:12px">
+      <div class="ttl">「Repository not found」と AI に言われたら</div>
+      <p style="margin:0">gift-org の Collaborator 招待がまだ届いていない状態です。<b>Chatwork DM で青山さんに連絡</b>してください（招待メールを再送してもらう）。</p>
     </div>
   </div>
 
@@ -292,22 +321,20 @@ claude</div>
     <p style="margin:0 0 8px">下の言い方をそのままコピペして AI に投げれば、あとは AI がやります。<br/>覚える必要はありません。ここを見ながら順に頼んでください。</p>
   </div>
 
-  <h3>セットアップ（試運転を始められる状態にする）</h3>
-  <div class="say">試運転できるようにセットアップして</div>
-
-  <h3>自社情報を .env に書く（実送信の前に必須）</h3>
-  <div class="say">
-    私の会社情報を <b>.env</b> に書いてほしい。<br/>
-    会社名は <b>◯◯</b>、担当者名は <b>川瀬 ◯◯</b>、フリガナは <b>カワセ　◯◯</b>、<br/>
-    メールは <b>◯◯@◯◯.jp</b>、電話は <b>03-◯◯◯◯-◯◯◯◯</b>、URL は <b>https://◯◯</b>。
-  </div>
-  <div class="warn">
-    <div class="ttl">この情報が入っていないと本番送信は動きません</div>
-    <p style="margin:0">エンジンが起動時に止まる仕組みになっています（誤送信の予防）。DRY_RUN（練習モード）だけは、未入力でも動きます。</p>
+  <h3>セットアップ（試運転を始められる状態にする・<b>これ 1 つで全部入る</b>）</h3>
+  <div class="say">セットアップして</div>
+  <div class="ok">
+    <div class="ttl">AI が会話で聞き出して、そのまま DB に入れます</div>
+    <p style="margin:0">AI が順に「会社名は？」「担当者名は？」「フリガナ（全角カタカナ）は？」「メール／電話／自社 URL は？」「初期文面はこれで良い？」を日本語で聞いてくれます。<br/>
+    川瀬さんは <b>答えるだけ</b>。管理画面を開く必要はありません。最後にリハーサル（sandbox に 1 通）まで自動で通ります。<br/>
+    <b>.env は触らなくて OK</b>。IMAP パスワード等の秘密は AI が聞き出しません（別途 <code>engine/.env</code> に貼る運用）。</p>
   </div>
 
-  <h3>管理画面を開く</h3>
+  <h3>管理画面を開く（後から変えたくなったとき）</h3>
   <div class="say">管理画面をブラウザで開いて</div>
+  <p style="color:var(--text-mute);font-size:13.5px;margin:4px 0 0">
+    ※ セットアップ後に <b>自社情報を変えたい</b> ときは <a href="http://127.0.0.1:3000/sender">/sender</a>、<b>文面を変えたい</b> ときは <a href="http://127.0.0.1:3000/templates">/templates</a>、<b>送信前の確認</b> は <a href="http://127.0.0.1:3000/queue">/queue</a> です。
+  </p>
 
   <h3>実在先を追加する</h3>
   <div class="say">
@@ -322,10 +349,13 @@ claude</div>
     ok と出たら次へ。ng が出たら AI が原因を教えてくれます。
   </p>
 
-  <h3>確認待ちを見る（送信前の最終チェック）</h3>
+  <h3>確認待ちを見る（送信前の最終チェック・貼り付け運用）</h3>
   <div class="say">確認待ちを見せて</div>
   <p style="color:var(--text-mute);font-size:13.5px;margin:4px 0 0">
-    ※ 実在先は全件 <b>川瀬さんが目で見て承認</b> してから送られます。ブラウザに一覧が出るので、内容を見て「送信 / 補完して送信 / スキップ」のどれかを選んでください。
+    ※ 実在先は全件 <b>川瀬さんが目で見て承認</b> してから送ります。<br/>
+    ① 一覧の「詳細」を開くと、<b>相手フォームに貼り付ける 8 項目（会社名／担当者名／カナ／メール／電話／URL／件名／本文）</b> が並びます。<br/>
+    ② 「相手フォームを別タブで開く」を押して、各項目の <b>「コピー」</b> ボタンで順に貼り付けます（本文もそのまま貼れば OK）。<br/>
+    ③ 送信できたら、その画面の <b>「送信済みにする」</b> を押して状態を更新します。うまく送れなかったら「スキップ」。
   </p>
 
   <h3>成績を見る</h3>
@@ -397,18 +427,28 @@ claude</div>
   </div>
 
   <div class="warn">
-    <div class="ttl">権限が足りないとき</div>
-    <p style="margin:0">gift-org のメンバー招待がまだの場合、<b>Issue だけ</b> 立てて「青山さんへ引き継ぎ」と本文に書きます。青山さんが後で対応。<br/>
-    川瀬さんは何もしなくて OK。</p>
+    <div class="ttl">権限が足りないとき（AI が 3 段階で判断）</div>
+    <ol style="margin:6px 0 0;padding-left:22px">
+      <li><b>書き込み権限あり</b>: feature ブランチで PR まで作る（青山さんがマージ）</li>
+      <li><b>Issue だけ立てられる</b>: Issue に「青山さんへ引き継ぎ」と明記（＝gift-org 招待前の状態でも Issue は書けることが多い）</li>
+      <li><b>fork なら書ける</b>: <code>gh repo fork</code> で自分の GitHub アカウント側に fork を作り、そこから PR を送る（Collaborator 招待が届いた後の運用）</li>
+      <li><b>gh 自体が動かない</b>: <code>~/gift-feedback-<i>YYYYMMDD-HHMM</i>.md</code> に <b>コピペ用の下書き</b> を保存 → AI が「Chatwork DM で青山さんに送る文面ができました」と案内 → 川瀬さんはそのまま Chatwork に貼る</li>
+    </ol>
+    <p style="margin:8px 0 0">川瀬さんは何もしなくて OK。AI が状況に応じて自動で選びます。</p>
   </div>
 
   <div class="ok">
     <div class="ttl">青山さんが承認する導線</div>
     <p style="margin:0">
-      Issue → <a href="https://github.com/gift-org/form-sales/issues">github.com/gift-org/form-sales/issues</a><br/>
-      PR → <a href="https://github.com/gift-org/form-sales/pulls">github.com/gift-org/form-sales/pulls</a><br/>
+      試運転由来の Issue 一覧 → <a href="https://github.com/gift-org/form-sales/issues?q=is%3Aissue+label%3Atrial-feedback">issues?label=trial-feedback</a><br/>
+      試運転由来の PR 一覧 → <a href="https://github.com/gift-org/form-sales/pulls?q=is%3Apr+label%3Atrial-feedback">pulls?label=trial-feedback</a><br/>
       青山さんは 1 日 1 回、上を軽くチェックして、対応方針を決める or マージします。
     </p>
+  </div>
+
+  <div class="warn" style="margin-top:12px">
+    <div class="ttl">Issue に書かない情報（AI が自動で伏字にします）</div>
+    <p style="margin:0">Issue や PR 本文に <b>.env の中身・送信元メール／電話番号・DATABASE_URL・実在先の会社名や URL</b> は絶対に含めないでください。AI アシスタントは起票前に自動で <code>◯◯◯</code> に置き換えます。手打ちで書くときも同じルールで。</p>
   </div>
 
   <!-- ── 6. 5 画面 ──────────────────────────── -->
@@ -457,19 +497,32 @@ claude</div>
     </div>
   </div>
 
-  <!-- ── 7. 詰まり事典 ─────────────────────── -->
-  <h2><span class="chip">7</span>困ったとき（詰まり事典）</h2>
+  <!-- ── 7. 撤退ライン ─────────────────────── -->
+  <h2><span class="chip">7</span>撤退ラインの目安（Go / Pivot / Kill）</h2>
+  <div class="card strong">
+    <p style="margin:0 0 8px">試運転は「うまくいかなかったら止める」が前提。次のどれかに触れたら、その日のうちに青山さんに連絡してください。</p>
+    <ul style="margin:6px 0 0">
+      <li><b>Kill（即全停止＋電話）</b>: 誤送信が <b>1 件でも</b> 出た／実在先送信の停止ボタンが効かない疑い／法務案件（クレーム・お断り以上）</li>
+      <li><b>Pivot（青山さんに連絡して方針変更）</b>: 日次上限を超える通知が出た／連続 <b>3 日</b> フォーム到達 0 件／同じエラーで <b>2 回連続</b> 止まる</li>
+      <li><b>Go 継続の目安</b>: 返信率が <b>3%</b> 以上を <b>5 営業日</b> 維持できていれば OK</li>
+    </ul>
+    <p style="margin:8px 0 0;color:var(--text-mute);font-size:13.5px">詳細は青山さんが持っている「撤退ライン（Go / Pivot / Kill）」の判定基準（docs/12-pre-poc.md）で決まっています。数値の見直しがあれば Chatwork DM で共有されます。</p>
+  </div>
+
+  <!-- ── 8. 詰まり事典 ─────────────────────── -->
+  <h2><span class="chip">8</span>困ったとき（詰まり事典）</h2>
 
   <div class="card">
     <p style="margin:0 0 10px">まず、下の言い方で AI に投げてください。8 割はこれで解決します。</p>
     <div class="say">エラーが出た。読んで対処して</div>
-    <p style="margin-top:12px;color:var(--text-mute)">それでもダメなら青山さんに電話。</p>
+    <p style="margin-top:12px;color:var(--text-mute)">それでもダメなら <b>青山さんに電話</b>（電話番号は Chatwork DM で共有済み。分からなくなったら Chatwork の DM 履歴を検索）。<br/>
+    <b>誤送信の疑い・止まらない疑い</b> は Issue 起票より前に、まず電話です。</p>
   </div>
 
   <div class="trouble">
     <div class="t">
       <b>PostgreSQL に接続できません</b>
-      <p>AI に「Postgres を起動して」と頼めば <code>brew services start postgresql@16</code> を実行してくれます。</p>
+      <p>AI に「Postgres を起動して」と頼めば <code>brew services start postgresql@16</code> を実行してくれます。install-gift-assistant.sh を実行済みなら本体は入っています。</p>
     </div>
     <div class="t">
       <b>画面が真っ白／管理画面が開かない</b>
@@ -480,12 +533,20 @@ claude</div>
       <p>AI に「gh auth login して」と頼む。ブラウザで開いた URL の Authorize を押すだけ。</p>
     </div>
     <div class="t">
-      <b>「.env の値が足りません」と止まる</b>
-      <p>AI に「.env の必須項目を教えて。埋め方も出して」で誘導してくれます。</p>
+      <b>「Repository not found」で clone できない</b>
+      <p>gift-org の Collaborator 招待が未受領。<b>Chatwork DM で青山さんに連絡</b>して招待メールを再送してもらう。</p>
+    </div>
+    <div class="t">
+      <b>「送信元情報が未設定です」と止まる</b>
+      <p>AI に「<b>セットアップして</b>」と言えば会話で入ります。既に入れた項目を変えたいなら「管理画面の送信元を開いて」でも OK。<b>.env は触らなくて OK</b>。</p>
     </div>
     <div class="t">
       <b>送信が止まらない気がする</b>
-      <p>まず管理画面右上の <b>赤い「全停止」ボタン</b> を押す。落ち着いてから AI に「状況を教えて」。</p>
+      <p>まず管理画面右上の <b>赤い「全停止」ボタン</b> を押す → <b>青山さんに電話</b>（電話番号は Chatwork DM 履歴）。落ち着いてから AI に「状況を教えて」。</p>
+    </div>
+    <div class="t">
+      <b>Issue や PR が立たない（gh の権限不足）</b>
+      <p>AI が <code>~/gift-feedback-*.md</code> に <b>コピペ用の下書き</b> を出します。中身をそのまま Chatwork DM で青山さんに送れば OK。</p>
     </div>
     <div class="t">
       <b>何をしてよいか分からない</b>

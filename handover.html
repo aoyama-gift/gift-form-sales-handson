@@ -206,33 +206,11 @@
   <h2><span class="chip">B</span>青山さんが押さえる資料</h2>
   <div class="cards">
 
-    <a class="card" href="./operator-manual.html">
-      <span class="order">READ 1</span>
-      <div class="kind">HTML</div>
-      <h3>操作マニュアル</h3>
-      <p class="sum">運用コンソールの画面ごとの操作、確認待ちの判断、文面の差し替え、全停止までを画面の言葉でまとめた 1 冊。</p>
-      <div class="meta">
-        <span>読み手: <b>川瀬さん（現場運用）</b></span>
-        <span>使う場面: <b>毎日の運用</b></span>
-      </div>
-    </a>
-
-    <a class="card" href="./trial-runbook.html">
-      <span class="order">READ 2</span>
-      <div class="kind">HTML</div>
-      <h3>試運転 ランブック</h3>
-      <p class="sum">試運転の段取り。朝・昼・夕の流れ、Go / Pivot / Kill の判定ライン、緊急時の動き、tracking の使い方まで。</p>
-      <div class="meta">
-        <span>読み手: <b>川瀬さん・青山さん</b></span>
-        <span>使う場面: <b>試運転の期間中</b></span>
-      </div>
-    </a>
-
     <a class="card" href="../../docs/trial-mac.md">
-      <span class="order">READ 3</span>
+      <span class="order">READ 1</span>
       <div class="kind">Markdown</div>
       <h3>Mac 試運転 手順（詳細）</h3>
-      <p class="sum">Mac 1 台での 1 コマンド起動、送信元 .env の埋め方、実在先 CSV の投入、プリフライト、10.2 試送ゲートまでの詳細フロー。</p>
+      <p class="sum">Mac 1 台での 1 コマンド起動、管理画面 <code>/sender</code> からの送信元登録、実在先 CSV の投入、プリフライト、10.2 試送ゲートまでの詳細フロー。</p>
       <div class="meta">
         <span>読み手: <b>青山さん（管理者）</b></span>
         <span>使う場面: <b>並行試運転のセットアップ</b></span>
@@ -240,7 +218,7 @@
     </a>
 
     <a class="card" href="../../docs/trial-territory-split.md">
-      <span class="order">READ 4</span>
+      <span class="order">READ 2</span>
       <div class="kind">Markdown</div>
       <h3>担当分けメモ（青山さん・川瀬さん）</h3>
       <p class="sum">実在先リストの担当分け・「同じ会社に 2 人から送らない」ルール・週次チェックの回し方。並行試運転の必読。</p>
@@ -250,18 +228,42 @@
       </div>
     </a>
 
+    <a class="card" href="../../docs/12-pre-poc.md">
+      <span class="order">READ 3</span>
+      <div class="kind">Markdown</div>
+      <h3>撤退ライン（Go / Pivot / Kill）</h3>
+      <p class="sum">試運転の判定基準。数値の閾値、判断者、切り替え時の連絡フロー。青山さんが Chatwork DM で川瀬さんに一度だけ口頭説明する。</p>
+      <div class="meta">
+        <span>読み手: <b>青山さん</b></span>
+        <span>使う場面: <b>日次・週次判定</b></span>
+      </div>
+    </a>
+
+    <a class="card" href="../../docs/kawase-handson.html">
+      <span class="order">READ 4</span>
+      <div class="kind">HTML</div>
+      <h3>川瀬さんに渡す資料（読み合わせ用）</h3>
+      <p class="sum">川瀬さんに渡す前に、青山さんも 1 回目を通しておく。「アカウント招待」「Collaborator 招待」「連絡先電話」の 3 点セットが Chatwork DM で送れているか確認。</p>
+      <div class="meta">
+        <span>読み手: <b>青山さん（配布前チェック）</b></span>
+        <span>使う場面: <b>川瀬さんへ渡す前</b></span>
+      </div>
+    </a>
+
   </div>
 
   <!-- ── 川瀬さんに渡す前チェックリスト ── -->
   <h2><span class="chip">C</span>川瀬さんに渡す前チェックリスト（青山さん）</h2>
   <div class="checklist">
     <ol>
-      <li><b>.env のテンプレを別チャネルで共有</b> ― メール本文に秘密を書かない（Chatwork DM か 1Password / パスワード付き zip 等）</li>
-      <li><b>GitHub アクセス権を発行</b> ― gift-org/form-sales に Collaborator 招待。招待ができない場合は「fork ベースの PR で送ってもらう or Issue のみ運用」を口頭説明</li>
-      <li><b>実在先リストの分担を口頭合意</b> ― 「担当分けメモ」の割当比率・受け渡しタイミングをその場で決める（1：1 でスタート推奨）</li>
-      <li><b>全停止ボタンの説明を口頭で 1 回</b> ― 「変だと思ったら押して OK。復旧は AI に頼めば戻せる」</li>
-      <li><b>撤退ライン（Go / Pivot / Kill）を口頭で 1 回</b> ― docs/12-pre-poc.md の 3 判定を要点だけ</li>
-      <li><b>初回だけ 15〜30 分横で見る</b> ― セットアップ〜1 件目の確認待ち承認まで、隣で見守る</li>
+      <li><b>AI アシスタントのアカウント招待メールを送付</b> ― Team プランのメンバー招待、または川瀬さん名義の個人プランを用意（<b>アカウント共有は NG</b>：利用規約違反＆停止リスク）</li>
+      <li><b>GitHub Collaborator 招待</b> ― gift-org/form-sales に招待。招待前に川瀬さんが clone すると "Repository not found" で詰まるため、<b>招待メール受信を先に確認</b> してもらう</li>
+      <li><b>連絡先の電話番号を Chatwork DM で共有</b> ― 資料には電話番号を書かない。Chatwork DM 経由で「試運転期間中の緊急連絡先」を送っておく</li>
+      <li><b>送信元情報は川瀬さんが AI に「セットアップして」と言うだけで入る</b> ― AI が会話で会社名・担当者名・カナ・メール・電話・URL・初期文面を聞き出し、DB (<code>sender_identity</code> / <code>templates</code>) に入れて sandbox プリフライトまで自動で通す。後から変えたい場合のみ管理画面 <code>/sender</code> ／ <code>/templates</code> を使う。<b>.env は触らない</b>。青山さんは値を見ない。<br/>共有が必要な秘密（DB パスワード等）がある場合は <b>1Password / Bitwarden 等のパスワードマネージャの共有ボールト</b> を使う（メール本文・パスワード付き zip は NG）</li>
+      <li><b>実在先リストは青山さんが 1 人で切り出し</b> ― 「担当分けメモ」の割当を青山さんが決めて、川瀬さん側に渡す分だけを CSV 化。両 Mac 間で同一 domain が重複しないよう青山さんが最終責任を持つ</li>
+      <li><b>全停止ボタンの説明を Chatwork DM か初回対面で 1 回</b> ― 「変だと思ったら押して OK。復旧は AI に頼めば戻せる」</li>
+      <li><b>撤退ライン（Go / Pivot / Kill）を Chatwork DM で 1 回</b> ― docs/12-pre-poc.md の 3 判定を要点だけ。ハンズオン §7 にも記載済み</li>
+      <li><b>初回だけ 15〜30 分横で見る</b> ― セットアップ〜1 件目の確認待ち承認まで、隣で見守る（アカウント作成の初回だけ）</li>
     </ol>
   </div>
 
@@ -270,15 +272,31 @@
   <div class="checklist">
     <ol>
       <li><b>法務 OK</b> ― プライバシーポリシーの弁護士チェック済（2026-06-30 取得）</li>
-      <li><b>青山さん Mac が起動</b> ― 送信元 .env が埋まっている</li>
-      <li><b>川瀬さん Mac にセットアップ完了</b> ― AI アシスタント初期化と gh 認証まで終わっている</li>
+      <li><b>青山さん Mac が起動</b> ― 送信元情報を <code>/sender</code> または AI「セットアップして」で登録済み</li>
+      <li><b>川瀬さん Mac にセットアップ完了</b> ― AI アシスタント初期化と gh 認証まで終わり、AI に「セットアップして」で自社情報＋初期文面が DB に入っている（<b>.env の SENDER_* 手書きは不要</b>）</li>
       <li><b>実在先リストの担当分けが済んでいる</b> ― 「担当分けメモ」に沿ってスプレッドシート更新済み</li>
     </ol>
   </div>
 
-  <h2><span class="chip">E</span>困ったとき</h2>
+  <!-- ── 青山さんの承認導線 ── -->
+  <h2><span class="chip">E</span>青山さんの承認導線（試運転由来 Issue / PR）</h2>
   <div class="checklist">
-    <p style="margin:0">連絡先: <span class="contact">青山さん</span> ／ 誤送信・止まらない疑いは並行して電話。</p>
+    <p style="margin:0 0 8px">川瀬さん由来の Issue / PR は <b>trial-feedback ラベル</b> で自動分類されます。青山さんは 1 日 1 回下の 2 本を見るだけで OK。</p>
+    <ul style="margin:0;padding-left:22px">
+      <li>試運転由来 Issue 一覧: <a href="https://github.com/gift-org/form-sales/issues?q=is%3Aissue+label%3Atrial-feedback">issues?label=trial-feedback</a></li>
+      <li>試運転由来 PR 一覧: <a href="https://github.com/gift-org/form-sales/pulls?q=is%3Apr+label%3Atrial-feedback">pulls?label=trial-feedback</a></li>
+    </ul>
+    <p style="margin:8px 0 0;font-size:13px;color:var(--text-mute)">
+      ※ ラベル <code>trial-feedback</code> と <code>urgent</code> は事前にリポジトリに作成しておく（<code>gh label create trial-feedback</code> ／ <code>gh label create urgent</code>）。
+    </p>
+  </div>
+
+  <h2><span class="chip">F</span>困ったとき</h2>
+  <div class="checklist">
+    <p style="margin:0 0 6px">連絡先: <span class="contact">青山さん</span> ／ 誤送信・止まらない疑いは並行して電話。</p>
+    <p style="margin:0;font-size:13.5px">
+      <b>電話番号は公開しません。</b>試運転期間中の緊急連絡先は Chatwork DM で川瀬さん・青山さん間で個別共有しています（本チェックリスト C-3 参照）。番号を紛失した場合は Chatwork DM の履歴を検索。
+    </p>
   </div>
 
   <div class="foot">
