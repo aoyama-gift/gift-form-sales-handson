@@ -17,15 +17,10 @@
     --text-mute:#a9b8d6;
     --card-bg:rgba(255,255,255,0.06);
     --card-bd:rgba(255,255,255,0.14);
-    --card-bg-strong:rgba(255,255,255,0.09);
     --warn-bg:rgba(212,175,55,0.14);
     --warn-bd:rgba(212,175,55,0.55);
     --ok-bg:rgba(101,185,221,0.12);
     --ok-bd:rgba(101,185,221,0.45);
-    --danger-bg:rgba(255,120,120,0.12);
-    --danger-bd:rgba(255,120,120,0.45);
-    --code-bg:#0b0f28;
-    --code-bd:rgba(101,185,221,0.35);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -37,27 +32,25 @@
     line-height:1.8;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:920px;margin:0 auto;padding:56px 26px 96px}
-
+  .wrap{max-width:860px;margin:0 auto;padding:56px 26px 96px}
   header{
     border-bottom:1px solid rgba(255,255,255,0.14);
-    padding-bottom:26px;margin-bottom:36px;
+    padding-bottom:28px;margin-bottom:36px;
   }
   .brand{
     font-size:12px;letter-spacing:.32em;color:var(--gold);
     font-weight:800;text-transform:uppercase;margin-bottom:10px;
   }
   h1{
-    font-size:32px;line-height:1.35;margin:0 0 12px;font-weight:800;letter-spacing:.02em;
+    font-size:32px;line-height:1.35;margin:0 0 14px;font-weight:800;letter-spacing:.02em;
     background:linear-gradient(90deg,#fff 0%,var(--sky) 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
   .lede{color:var(--text-mute);font-size:15px;margin:0;max-width:70ch}
   .lede b{color:var(--gold-2)}
-
   h2{
     display:flex;align-items:center;gap:14px;
-    font-size:22px;margin:60px 0 12px;font-weight:800;letter-spacing:.02em;
+    font-size:22px;margin:56px 0 14px;font-weight:800;letter-spacing:.02em;
   }
   .chip{
     display:inline-flex;align-items:center;justify-content:center;
@@ -67,21 +60,15 @@
     box-shadow:0 4px 14px rgba(46,91,255,0.5);
     flex-shrink:0;
   }
-  h3{
-    font-size:15px;margin:22px 0 6px;font-weight:700;color:var(--sky);letter-spacing:.02em;
-  }
-
+  h3{font-size:15px;margin:20px 0 6px;font-weight:700;color:var(--sky);letter-spacing:.02em;}
   .card{
     background:var(--card-bg);
     border:1px solid var(--card-bd);
     border-radius:14px;
-    padding:22px 26px;
-    margin:12px 0;
+    padding:22px 26px;margin:12px 0;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }
-  .card.strong{background:var(--card-bg-strong)}
-
   .warn{
     background:var(--warn-bg);
     border:1px solid var(--warn-bd);
@@ -90,94 +77,33 @@
     padding:16px 20px;margin:14px 0;
   }
   .warn .ttl{font-weight:800;color:var(--gold-2);margin-bottom:6px;letter-spacing:.02em}
-
   .ok{
     background:var(--ok-bg);
     border:1px solid var(--ok-bd);
     border-radius:10px;
     padding:14px 18px;margin:10px 0;color:var(--sky);font-size:14px;
   }
-
-  .kbd{
-    display:inline-block;padding:2px 8px;border-radius:6px;
-    background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;
+  .kv{
+    display:grid;grid-template-columns:180px 1fr;gap:10px 18px;margin:10px 0;
   }
-
-  /* コピー用ブロック */
-  .copybox{
-    position:relative;
-    background:var(--code-bg);
-    border:1px solid var(--code-bd);
-    border-radius:12px;
-    padding:18px 22px 18px 22px;
-    margin:14px 0;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-    font-size:14.5px;line-height:1.7;
-    color:#dff0ff;
-    white-space:pre-wrap;
-    word-break:break-all;
-    padding-right:120px;
-  }
-  .copybox.prompt{
-    background:linear-gradient(120deg,#0b0f28 0%,#0f1436 100%);
-    border-color:rgba(212,175,55,0.35);
-    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",system-ui,sans-serif;
-    font-size:15.5px;
-    color:#f6efd6;
-  }
-  .copybtn{
-    position:absolute;top:10px;right:10px;
-    padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.35);
-    background:rgba(255,255,255,0.08);
-    color:#fff;font-weight:700;font-size:13px;letter-spacing:.05em;
-    cursor:pointer;
-    transition:background 0.15s, transform 0.1s;
-  }
-  .copybtn:hover{background:rgba(255,255,255,0.16)}
-  .copybtn:active{transform:scale(0.96)}
-  .copybtn.copied{
-    background:linear-gradient(135deg,var(--blue),var(--sky));
-    border-color:transparent;
-  }
-
-  .expect{
-    background:rgba(101,185,221,0.08);
-    border-left:3px solid var(--sky);
-    border-radius:0 8px 8px 0;
-    padding:12px 18px;
-    margin:10px 0;
-    font-size:14px;color:var(--text-mute);
-  }
-  .expect b{color:var(--sky)}
-
+  .kv .k{color:var(--text-mute);font-size:14px}
+  .kv .v{font-weight:600}
   ol.plain{padding-left:22px;margin:8px 0}
-  ol.plain li{margin:6px 0}
+  ol.plain li{margin:8px 0}
   ul.plain{padding-left:22px;margin:8px 0}
   ul.plain li{margin:6px 0}
-
-  .badge{
-    display:inline-block;padding:2px 10px;border-radius:999px;
-    font-size:11px;font-weight:800;letter-spacing:.08em;
-    background:linear-gradient(135deg,var(--blue),var(--sky));
-    color:#fff;margin-right:8px;
-  }
-  .badge.gold{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1a1a2e}
-
   a{color:var(--gold-2);text-decoration:underline;text-underline-offset:3px}
-
   .foot{
-    margin-top:64px;padding-top:24px;
+    margin-top:56px;padding-top:24px;
     border-top:1px solid rgba(255,255,255,0.12);
     color:var(--text-mute);font-size:13px;
   }
-
   @media (max-width:640px){
     .wrap{padding:40px 18px 60px}
     h1{font-size:26px}
     h2{font-size:19px}
-    .copybox{padding-right:16px;padding-bottom:56px}
-    .copybtn{top:auto;bottom:10px;right:10px}
+    .kv{grid-template-columns:1fr;gap:2px 0}
+    .kv .k{font-size:12px;letter-spacing:.05em}
   }
 </style>
 </head>
@@ -188,243 +114,105 @@
   <div class="brand">GIFT — Form Sales</div>
   <h1>川瀬さん用 ハンズオン<br>フォーム営業ツール 試運転</h1>
   <p class="lede">
-    <b>上から順に「コピー」ボタンを押して貼るだけ</b>で試運転が始められる形にしました。
-    考えることは基本ゼロです。詰まったら青山さんに電話（初回は 20〜30 分横で見ています）。
+    <b>Mac に何かを入れる作業は一切ありません。</b>
+    VPN で会社の中に入って、URL を開いてログインするだけです。
   </p>
 </header>
 
 <div class="warn">
-  <div class="ttl">この 3 点だけ最初に覚えてください</div>
-  <ol class="plain">
-    <li><b>コピーボタンを押す</b> → <b>ターミナル</b>か<b>AI アシスタント</b>に貼る（それぞれ書いてあります）</li>
-    <li>途中で AI が質問してきたら、そのまま答える（会社名や URL）</li>
-    <li>ブラウザに管理画面が出たら、そこで <b>「承認して自動送信」</b> ボタンを押すだけ</li>
+  <div class="ttl">おおよその流れ</div>
+  <ol class="plain" style="margin:0">
+    <li>Mac の VPN を接続する</li>
+    <li>ブラウザで URL を開く</li>
+    <li>ログイン → 使う</li>
   </ol>
 </div>
 
-<!-- ─────── 準備 ─────── -->
-
-<h2><span class="chip">1</span>ターミナルを開く</h2>
+<h2><span class="chip">1</span>VPN を接続する</h2>
 <div class="card">
-  <p>Mac 画面右上の虫眼鏡（Spotlight）を押して、下の 6 文字を入力 → Enter。</p>
-  <div class="copybox" data-copy="ターミナル">ターミナル<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">黒い画面が開けば成功です。以降はここに「コピペ」していきます。</div>
+  <p>コラボリストの時と同じ VPN 設定でそのまま繋がります。Mac のメニューバーから VPN を「接続」にしてください。</p>
+  <div class="ok">接続できたか分からないときは、下の URL が開けるかで判断できます（開ければ VPN OK）。</div>
 </div>
 
-<h2><span class="chip">2</span>準備の下ごしらえ（Homebrew を入れる）</h2>
+<h2><span class="chip">2</span>URL を開く</h2>
 <div class="card">
-  <p>初回だけ必要な下ごしらえです。青山さんが横で見ています。パスワードを聞かれたら Mac のログインパスワードを入力してください。</p>
-  <div class="copybox" data-copy='/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">数分かかります。最後に <b>Installation successful!</b> と出れば成功。もし途中で止まったら青山さんに電話。</div>
-</div>
-
-<h2><span class="chip">3</span>AI アシスタントの土台を入れる</h2>
-<div class="card">
-  <p>下の 1 行をターミナルにコピペ。数十秒で完了します。</p>
-  <div class="copybox" data-copy="brew install node git">brew install node git<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect"><b>node</b> と <b>git</b> という部品が入ります。既に入っていれば「already installed」と出るだけで問題なしです。</div>
-</div>
-
-<h2><span class="chip">4</span>AI アシスタント本体を入れる</h2>
-<div class="card">
-  <p>これでいよいよ AI アシスタントが Mac に入ります。</p>
-  <div class="copybox" data-copy="npm install -g @anthropic-ai/claude-code">npm install -g @anthropic-ai/claude-code<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">1〜2 分。エラーが出たら青山さんに電話。</div>
-</div>
-
-<h2><span class="chip">5</span>AI アシスタントを起動してログイン</h2>
-<div class="card">
-  <p>下を貼って Enter → 初回だけブラウザが開いてログイン画面が出ます。青山さんが横で認証します。</p>
-  <div class="copybox" data-copy="claude">claude<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">ログインが済むと、ターミナルの中に <b>AI に話しかける入力欄</b> が出ます。以降はここに「決まり文句」を貼っていきます。</div>
-  <div class="warn">
-    <div class="ttl">この場面で一旦区切って青山さんへ</div>
-    今日はここまでで OK。明日から実運用スタートです。
+  <p>ブラウザ（Safari か Chrome）で下の URL を開きます。</p>
+  <div class="kv">
+    <div class="k">URL</div>
+    <div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace">http://192.168.1.202:3000/</div>
   </div>
+  <div class="ok">URL は Slack DM にも貼ってあります。ブックマーク推奨。</div>
 </div>
 
-<!-- ─────── ここから明日 ─────── -->
-
-<h2><span class="chip">6</span>【明日 STEP 1】試運転ツールを取り込む</h2>
+<h2><span class="chip">3</span>ログイン</h2>
 <div class="card">
-  <p>ターミナルに戻って（AI アシスタントを一度 <span class="kbd">Ctrl+C</span> で閉じてから）下を貼る。</p>
-  <div class="copybox" data-copy="cd ~/Documents && git clone https://github.com/gift-org/form-sales.git && cd form-sales && claude">cd ~/Documents && git clone https://github.com/gift-org/form-sales.git && cd form-sales && claude<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">試運転ツールが Mac に取り込まれ、その場所で AI アシスタントが開きます。</div>
+  <p>ID とパスワードは <b>Slack の青山さんとの DM に届いています</b>。そちらを参照してください（このページには載せていません）。</p>
+  <p style="margin-top:14px;color:var(--text-mute);font-size:14px">初回はブラウザに保存しておくと次回から自動で入ります。</p>
 </div>
 
-<h2><span class="chip">7</span>【明日 STEP 2】AI にセットアップしてもらう</h2>
+<h2><span class="chip">4</span>初回だけ：会社情報を入れる</h2>
 <div class="card">
-  <p><span class="badge gold">ここが一番のポイント</span>これを AI に貼るだけで、必要なもの全部インストールしてくれます。</p>
-  <div class="copybox prompt" data-copy="試運転できるようにセットアップして">試運転できるようにセットアップして<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">
-    5〜10 分ほど。途中で <b>Mac のログインパスワード</b>を求められたら入れる。<br>
-    完了すると AI が「次は会社の情報を教えてください」と聞いてきます。
-  </div>
-</div>
-
-<h2><span class="chip">8</span>【明日 STEP 3】会社の情報を答える</h2>
-<div class="card">
-  <p>AI が順番に質問してくるので、そのまま答えるだけ。<b>会社名は？</b> → 答える → <b>担当者名は？</b> → 答える。この繰り返し。</p>
-  <p style="margin-top:16px;margin-bottom:6px;color:var(--text-mute);font-size:14px">聞かれる項目（覚えなくて OK。順番に聞かれます）：</p>
+  <p>ログインすると管理画面が開きます。左のメニューから <b>「送信元」</b> を選んで、以下 6 項目を入力して保存。</p>
   <ul class="plain">
     <li>会社名</li>
     <li>担当者名</li>
     <li>担当者名のフリガナ（カタカナ）</li>
-    <li>メールアドレス（共用の contact@gift-original.jp）</li>
+    <li>メールアドレス（共用アドレス）</li>
     <li>電話番号</li>
     <li>自社の URL</li>
-    <li>初期文面 1 本（AI が例を出してくれるので、そのままで OK）</li>
   </ul>
-  <div class="ok">全部答え終わると AI が「セットアップ完了しました」と報告してくれます。</div>
+  <div class="ok">1 回入力すれば次回以降は不要です。あとから変更したいときも同じ「送信元」画面から。</div>
 </div>
 
-<h2><span class="chip">9</span>【明日 STEP 4】試送する会社の URL を教える</h2>
+<h2><span class="chip">5</span>毎日の業務（送る）</h2>
 <div class="card">
-  <p>青山さんから当日、実在の会社のフォーム URL を伝えられます。それを AI に貼って、下のプロンプトを続けて貼る。</p>
-  <div class="copybox prompt" data-copy="これから会社のフォーム URL を教えるので、試送リストに追加して。">これから会社のフォーム URL を教えるので、試送リストに追加して。<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">AI が URL を投入して、リストに何件入ったか報告します。</div>
-</div>
-
-<h2><span class="chip">10</span>【明日 STEP 5】本番の前にリハーサル</h2>
-<div class="card">
-  <p>本物に送る前に、練習用フォームに 1 通だけ流して動作確認します。</p>
-  <div class="copybox prompt" data-copy="本番の前にリハーサルして">本番の前にリハーサルして<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">AI が「OK」と返せば準備完了。「NG」が出たら青山さんに電話。</div>
-</div>
-
-<h2><span class="chip">11</span>【明日 STEP 6】管理画面を開く</h2>
-<div class="card">
-  <p>ここで一度ブラウザ側に移ります。</p>
-  <div class="copybox prompt" data-copy="管理画面をブラウザで開いて">管理画面をブラウザで開いて<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">Safari か Chrome で管理画面が開きます。左メニューから <b>「確認待ち」</b>を開いてください。</div>
-</div>
-
-<h2><span class="chip">12</span>【明日 STEP 7】1 件ずつ内容を見て「承認して自動送信」</h2>
-<div class="card">
-  <p>ここが川瀬さんの一番大事な仕事。</p>
+  <p>青山さんから当日、実在の会社の URL がいくつか渡されます。</p>
   <ol class="plain">
-    <li>「確認待ち」に並んでいる 1 件目をクリック（詳細画面が開きます）</li>
-    <li>会社名・貼付け項目・文面本文が全部見えます。<b>ざっと目を通して</b>問題なさそうなら</li>
-    <li>青い <b>「承認して自動送信」</b>ボタンを押す</li>
+    <li>左メニューの <b>「確認待ち」</b> を開く</li>
+    <li>1 件目をクリックして詳細を開く</li>
+    <li>会社名・貼付け項目・文面本文が見えるので、目を通す</li>
+    <li>問題なさそうなら青い <b>「承認して自動送信」</b> ボタン</li>
     <li>確認ダイアログ「〇〇株式会社のフォームに送信します。よろしいですか？」→ <b>OK</b></li>
-    <li>「送信中...」→ 数十秒〜1 分で「送信済み」に変わります</li>
-    <li>次の 1 件へ。同じ流れ</li>
+    <li>「送信中...」→ 数十秒〜1 分で「送信済み」に変わる</li>
+    <li>次の 1 件へ、同じ流れ</li>
   </ol>
   <div class="warn">
-    <div class="ttl">大事：承認するのは川瀬さん本人だけ</div>
-    AI は勝手に押しません。川瀬さんが目で見て「これでいい」と思ったものだけ送ります。
+    <div class="ttl">送信ボタンを押すのは川瀬さん本人だけ</div>
+    自動で勝手に送られることはありません。目で見て「これでいい」と思ったものだけが送られます。
   </div>
 </div>
 
-<!-- ─────── 日常運用 ─────── -->
-
-<h2><span class="chip">13</span>成績を確認したいとき</h2>
+<h2><span class="chip">6</span>成績を見る・返信を捌く</h2>
 <div class="card">
-  <div class="copybox prompt" data-copy="今日の成績を教えて">今日の成績を教えて<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">AI が「送信 N 件・返信 N 件・アポ N 件」とまとめて教えてくれます。</div>
-</div>
-
-<h2><span class="chip">14</span>返信が来たらチェック</h2>
-<div class="card">
-  <p>相手企業から返信が来ると、共用アドレス経由で青山さん・川瀬さん両方の個人メールに届きます。管理画面の <b>「返信」</b>タブでも見られます。</p>
+  <h3>成績</h3>
+  <p>左メニューの <b>「ダッシュボード」</b>（トップ画面）で、送信数・返信数・アポ数を確認。</p>
+  <h3>返信</h3>
+  <p>相手企業から返信が来ると、左メニューの <b>「返信」</b> に自動で並びます。</p>
   <ul class="plain">
     <li>返信を開いて、種別（前向き／質問／お断り／自動応答）を選ぶ</li>
-    <li>前向きな返信は <b>「アポ獲得としてマーク」</b>ボタン</li>
-    <li>ダッシュボードの「アポ数」に反映される</li>
+    <li>前向きな返信は <b>「アポ獲得」</b> ボタン → ダッシュボードのアポ数に反映</li>
   </ul>
 </div>
 
-<h2><span class="chip">15</span>止めたいとき（全停止）</h2>
+<h2><span class="chip">7</span>止めたいとき</h2>
 <div class="card">
-  <p>画面右上に赤い <b>「全停止」</b>ボタンが常にあります。押せば即停止。</p>
-  <p style="margin-top:14px">AI に頼んでも止められます：</p>
-  <div class="copybox prompt" data-copy="全部止めて">全部止めて<button class="copybtn" data-target="prev">コピー</button></div>
+  <p>画面の <b>右上に赤い「全停止」ボタン</b> が常にあります。押せば即停止。何か違和感を感じたら迷わず押して大丈夫です。</p>
 </div>
 
-<!-- ─────── 詰まり対応 ─────── -->
-
-<h2><span class="chip">16</span>エラーが出たとき（魔法の一言）</h2>
+<h2><span class="chip">8</span>困ったとき</h2>
 <div class="card">
-  <p>AI に貼れば、AI が原因を読んで直そうとしてくれます。</p>
-  <div class="copybox prompt" data-copy="エラーが出た。読んで対処して">エラーが出た。読んで対処して<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">8 割はこれで解決します。それでもダメなら青山さんに電話。</div>
-</div>
-
-<h2><span class="chip">17</span>「これバグかも」と感じたら</h2>
-<div class="card">
-  <p>おかしいと感じたら、AI に自然な言葉で伝えるだけ。AI が状況を整理して GitHub の Issue（開発への正式な連絡）を自動で作ってくれます。</p>
-  <div class="copybox prompt" data-copy="〇〇の画面で〇〇がおかしい気がする。バグかもしれないので Issue にして">〇〇の画面で〇〇がおかしい気がする。バグかもしれないので Issue にして<button class="copybtn" data-target="prev">コピー</button></div>
-  <div class="expect">Issue は青山さんが 1 日 1 回まとめて確認して、開発 AI に対応させます。</div>
-</div>
-
-<!-- ─────── 参考 ─────── -->
-
-<h2><span class="chip">18</span>「あの決まり文句」チートシート</h2>
-<div class="card">
-  <p>覚えなくても、このページに戻ってコピーすれば OK。全部このページに載っています。</p>
   <ul class="plain">
-    <li><span class="badge">セットアップ</span>試運転できるようにセットアップして</li>
-    <li><span class="badge">追加</span>これから会社のフォーム URL を教えるので、試送リストに追加して。</li>
-    <li><span class="badge">練習</span>本番の前にリハーサルして</li>
-    <li><span class="badge">開く</span>管理画面をブラウザで開いて</li>
-    <li><span class="badge">成績</span>今日の成績を教えて</li>
-    <li><span class="badge">止める</span>全部止めて</li>
-    <li><span class="badge">エラー</span>エラーが出た。読んで対処して</li>
-    <li><span class="badge">バグ</span>〇〇がおかしい気がする。Issue にして</li>
+    <li>エラーが出た・見えない・動かない → <b>Slack か電話で青山さんへ</b></li>
+    <li>「これバグかも」と感じた → 同じく Slack で一言（青山さん側で対応します）</li>
   </ul>
+  <div class="ok">初回のログインと会社情報入力は、青山さんが 20〜30 分横で見ています。</div>
 </div>
 
 <div class="foot">
-  困ったときはいつでも青山さんに電話。<br>
-  このページの URL は Chatwork に貼ってあります。ブックマーク推奨。
+  Mac に何もインストールしていない状態が正しい状態です。<br>
+  以前 Slack DM で送っていた「AI アシスタントを Mac に入れる」等の手順は忘れて OK です。
 </div>
 
 </div>
-
-<script>
-(function(){
-  document.querySelectorAll('.copybtn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var box = btn.closest('.copybox');
-      var text = box.getAttribute('data-copy') || '';
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(function(){
-          flash(btn, 'コピーしました ✓');
-        }).catch(function(){
-          fallback(btn, text);
-        });
-      } else {
-        fallback(btn, text);
-      }
-    });
-  });
-
-  function fallback(btn, text){
-    var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position='fixed';ta.style.top='-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    try {
-      document.execCommand('copy');
-      flash(btn, 'コピーしました ✓');
-    } catch(e){
-      flash(btn, 'コピー失敗');
-    }
-    document.body.removeChild(ta);
-  }
-
-  function flash(btn, msg){
-    var orig = btn.textContent;
-    btn.textContent = msg;
-    btn.classList.add('copied');
-    setTimeout(function(){
-      btn.textContent = orig;
-      btn.classList.remove('copied');
-    }, 1600);
-  }
-})();
-</script>
-
 </body>
 </html>
